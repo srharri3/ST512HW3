@@ -387,11 +387,36 @@ F-statistic: 16.96 on 4 and 68 DF,  p-value: 1.086e-09</code></pre>
 <pre><code>       1 
 314.2928 </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = volume ~ avgtemp + I(avgtemp^2) + sqrt_precip + 
+    dayType, data = trailuser2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-256.32  -53.24   10.71   47.36  202.97 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    -519.37234  237.99934  -2.182 0.032550 *  
+avgtemp          25.45161    8.23890   3.089 0.002906 ** 
+I(avgtemp^2)     -0.16373    0.07013  -2.335 0.022513 *  
+sqrt_precip    -183.02440   39.11607  -4.679 1.42e-05 ***
+dayTypeweekend   89.81614   26.02518   3.451 0.000964 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 88.5 on 68 degrees of freedom
+Multiple R-squared:  0.5503,    Adjusted R-squared:  0.5238 
+F-statistic:  20.8 on 4 and 68 DF,  p-value: 3.129e-11</code></pre>
+</div>
 </div>
 </section>
 <section id="section-8" class="level1">
 <h1>#9</h1>
-<p><strong>I would favor reporting model 4. Like the homework says, there are a lot of 0’s for the precip variable, and the values are right skewed. With this in mind, taking the square root of precip helps reduce its skew, and therefore reduce the leverage of the data points with the greatest rainfall. This model will give better predictions for this data for these reasons.</strong></p>
+<p><strong>I would favor reporting model 4. Like the homework says, there are a lot of 0’s for the precip variable, and the values are right skewed. With this in mind, taking the square root of precip helps reduce its skew, and therefore reduce the leverage of the data points with the greatest rainfall. This model will give better predictions for this data for these reasons.The sqrt_precip value is more statisically significant when compared to the quadratic model (#3).</strong></p>
 </section>
 <section id="section-9" class="level1">
 <h1>#10</h1>
@@ -402,18 +427,18 @@ F-statistic: 16.96 on 4 and 68 DF,  p-value: 1.086e-09</code></pre>
 <p>b) (2 points) Use the model to predict the response for someone who has a BMI of 25 and a blood pressure (BP) of 90.</p>
 <p><strong>139.35</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> <span class="fl">66.45</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>beta_BMI <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.62</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>beta_BP <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.49</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>beta_interaction <span class="ot">&lt;-</span> <span class="fl">0.11</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>BMI <span class="ot">&lt;-</span> <span class="dv">25</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>BP <span class="ot">&lt;-</span> <span class="dv">90</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>interaction_term <span class="ot">&lt;-</span> BMI <span class="sc">*</span> BP</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>predicted_response <span class="ot">&lt;-</span> intercept <span class="sc">+</span> (beta_BMI <span class="sc">*</span> BMI) <span class="sc">+</span> (beta_BP <span class="sc">*</span> BP) <span class="sc">+</span> (beta_interaction <span class="sc">*</span> interaction_term)</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>predicted_response</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> <span class="fl">66.45</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>beta_BMI <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.62</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>beta_BP <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.49</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>beta_interaction <span class="ot">&lt;-</span> <span class="fl">0.11</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>BMI <span class="ot">&lt;-</span> <span class="dv">25</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>BP <span class="ot">&lt;-</span> <span class="dv">90</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>interaction_term <span class="ot">&lt;-</span> BMI <span class="sc">*</span> BP</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>predicted_response <span class="ot">&lt;-</span> intercept <span class="sc">+</span> (beta_BMI <span class="sc">*</span> BMI) <span class="sc">+</span> (beta_BP <span class="sc">*</span> BP) <span class="sc">+</span> (beta_interaction <span class="sc">*</span>(BMI <span class="sc">*</span> BP))</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>predicted_response</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 139.35</code></pre>
 </div>

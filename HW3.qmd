@@ -143,11 +143,13 @@ new_data <- data.frame(avgtemp = 55,
                        I.avgtemp.2 = 55^2, sqrt_precip = sqrt_precip_value, dayType = factor("weekday", levels = c("weekday", "weekend")))
 predicted_usage <- predict(model4, newdata = new_data)
 predicted_usage
+summary(model4)
 ```
+
 
 # #9
 
-**I would favor reporting model 4. Like the homework says, there are a lot of 0's for the precip variable, and the values are right skewed. With this in mind, taking the square root of precip helps reduce its skew, and therefore reduce the leverage of the data points with the greatest rainfall. This model will give better predictions for this data for these reasons.**
+**I would favor reporting model 4. Like the homework says, there are a lot of 0's for the precip variable, and the values are right skewed. With this in mind, taking the square root of precip helps reduce its skew, and therefore reduce the leverage of the data points with the greatest rainfall. This model will give better predictions for this data for these reasons.The sqrt_precip value is more statisically significant when compared to the quadratic model (#3).**
 
 # #10
 
@@ -175,7 +177,7 @@ BP <- 90
 
 interaction_term <- BMI * BP
 
-predicted_response <- intercept + (beta_BMI * BMI) + (beta_BP * BP) + (beta_interaction * interaction_term)
+predicted_response <- intercept + (beta_BMI * BMI) + (beta_BP * BP) + (beta_interaction *(BMI * BP))
 predicted_response
 ```
 
