@@ -331,28 +331,34 @@ F-statistic: 16.96 on 4 and 68 DF,  p-value: 1.086e-09</code></pre>
 <h1>#6</h1>
 <p>Use the model in equation 3 to complete each of the statements below:</p>
 <p>(a) (1 point) “When comparing two week-end days with the same temperature, a day on which it rains 0.25 inches will have an average of <strong><em>37.02 fewer</em></strong> trail users than a day on which it doesn’t rain.”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>.<span class="dv">25</span> <span class="sc">*</span> <span class="sc">-</span><span class="fl">148.079</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -37.01975</code></pre>
+</div>
+</div>
 <p>b) (1 point) “When comparing two days with the same temperature and precipitation, a weekday will have an average of <strong><em>93.65 fewer</em></strong> trail users than a weekend day.”</p>
 </section>
 <section id="section-5" class="level1">
 <h1>#7</h1>
 <p>(1 point) Use the model in equation 3 to predict the trail usage on a weekday when the avgtemp = 55◦ F and the precip = 0.15 in. Show some work or computer code.</p>
-<p><strong>532.643</strong></p>
+<p><strong>352.643</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>beta0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">599.94041</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>beta1 <span class="ot">&lt;-</span> <span class="fl">27.81275</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>beta2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.18344</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>beta3 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">148.07875</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>dayType_weekend <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>avgtemp <span class="ot">&lt;-</span> <span class="dv">55</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>precip <span class="ot">&lt;-</span> <span class="fl">0.15</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>predicted_volume <span class="ot">&lt;-</span> beta0 <span class="sc">+</span> </span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>                   (beta1 <span class="sc">*</span> avgtemp) <span class="sc">+</span> </span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>                   (beta2 <span class="sc">*</span> (avgtemp<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">+</span> </span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>                   (beta3 <span class="sc">*</span> precip) <span class="sc">+</span> </span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>                   (dayType_weekend <span class="sc">*</span> <span class="fl">93.65017</span>)</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>predicted_volume</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>beta0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">599.94041</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>beta1 <span class="ot">&lt;-</span> <span class="fl">27.81275</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>beta2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.18344</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>beta3 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">148.07875</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>dayType_weekend <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>avgtemp <span class="ot">&lt;-</span> <span class="dv">55</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>precip <span class="ot">&lt;-</span> <span class="fl">0.15</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>predicted_volume <span class="ot">&lt;-</span> beta0 <span class="sc">+</span> </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                   (beta1 <span class="sc">*</span> avgtemp) <span class="sc">+</span> </span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>                   (beta2 <span class="sc">*</span> (avgtemp<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">+</span> </span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>                   (beta3 <span class="sc">*</span> precip) <span class="sc">+</span> </span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>                   (dayType_weekend <span class="sc">*</span> <span class="fl">93.65017</span>)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>predicted_volume</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 352.643</code></pre>
 </div>
@@ -363,17 +369,17 @@ F-statistic: 16.96 on 4 and 68 DF,  p-value: 1.086e-09</code></pre>
 <p>(1 point) Use the model in equation 4 to predict the trail usage on a weekday when the avgtemp = 55◦ F and the precip = 0.15 in. Show some work or computer code.</p>
 <p><strong>314.292</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>trailuser2 <span class="ot">&lt;-</span> trailuser <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sqrt_precip =</span> <span class="fu">sqrt</span>(precip))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>trailuser2 <span class="ot">&lt;-</span> trailuser <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sqrt_precip =</span> <span class="fu">sqrt</span>(precip))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(volume <span class="sc">~</span> avgtemp <span class="sc">+</span> <span class="fu">I</span>(avgtemp<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> sqrt_precip <span class="sc">+</span> dayType, <span class="at">data =</span> trailuser2)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>sqrt_precip_value <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">0.15</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">avgtemp =</span> <span class="dv">55</span>,</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">I.avgtemp.2 =</span> <span class="dv">55</span><span class="sc">^</span><span class="dv">2</span>, <span class="at">sqrt_precip =</span> sqrt_precip_value, <span class="at">dayType =</span> <span class="fu">factor</span>(<span class="st">"weekday"</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"weekday"</span>, <span class="st">"weekend"</span>)))</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>predicted_usage <span class="ot">&lt;-</span> <span class="fu">predict</span>(model4, <span class="at">newdata =</span> new_data)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>predicted_usage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(volume <span class="sc">~</span> avgtemp <span class="sc">+</span> <span class="fu">I</span>(avgtemp<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> sqrt_precip <span class="sc">+</span> dayType, <span class="at">data =</span> trailuser2)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>sqrt_precip_value <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">0.15</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">avgtemp =</span> <span class="dv">55</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">I.avgtemp.2 =</span> <span class="dv">55</span><span class="sc">^</span><span class="dv">2</span>, <span class="at">sqrt_precip =</span> sqrt_precip_value, <span class="at">dayType =</span> <span class="fu">factor</span>(<span class="st">"weekday"</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"weekday"</span>, <span class="st">"weekend"</span>)))</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>predicted_usage <span class="ot">&lt;-</span> <span class="fu">predict</span>(model4, <span class="at">newdata =</span> new_data)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>predicted_usage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1 
 314.2928 </code></pre>
@@ -382,7 +388,7 @@ F-statistic: 16.96 on 4 and 68 DF,  p-value: 1.086e-09</code></pre>
 </section>
 <section id="section-7" class="level1">
 <h1>#9</h1>
-<p><strong>I would favor reporting model 4….</strong></p>
+<p>**I would favor reporting model 4</p>
 </section>
 <section id="section-8" class="level1">
 <h1>#10</h1>
@@ -393,18 +399,18 @@ F-statistic: 16.96 on 4 and 68 DF,  p-value: 1.086e-09</code></pre>
 <p>b) (2 points) Use the model to predict the response for someone who has a BMI of 25 and a blood pressure (BP) of 90.</p>
 <p><strong>139.35</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> <span class="fl">66.45</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>beta_BMI <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.62</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>beta_BP <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.49</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>beta_interaction <span class="ot">&lt;-</span> <span class="fl">0.11</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>BMI <span class="ot">&lt;-</span> <span class="dv">25</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>BP <span class="ot">&lt;-</span> <span class="dv">90</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>interaction_term <span class="ot">&lt;-</span> BMI <span class="sc">*</span> BP</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>predicted_response <span class="ot">&lt;-</span> intercept <span class="sc">+</span> (beta_BMI <span class="sc">*</span> BMI) <span class="sc">+</span> (beta_BP <span class="sc">*</span> BP) <span class="sc">+</span> (beta_interaction <span class="sc">*</span> interaction_term)</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>predicted_response</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> <span class="fl">66.45</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>beta_BMI <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.62</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>beta_BP <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.49</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>beta_interaction <span class="ot">&lt;-</span> <span class="fl">0.11</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>BMI <span class="ot">&lt;-</span> <span class="dv">25</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>BP <span class="ot">&lt;-</span> <span class="dv">90</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>interaction_term <span class="ot">&lt;-</span> BMI <span class="sc">*</span> BP</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>predicted_response <span class="ot">&lt;-</span> intercept <span class="sc">+</span> (beta_BMI <span class="sc">*</span> BMI) <span class="sc">+</span> (beta_BP <span class="sc">*</span> BP) <span class="sc">+</span> (beta_interaction <span class="sc">*</span> interaction_term)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>predicted_response</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 139.35</code></pre>
 </div>
