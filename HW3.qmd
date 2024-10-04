@@ -147,7 +147,7 @@ predicted_usage
 
 # #9
 
-**I would favor reporting model 4 
+**I would favor reporting model 4. Like the homework says, there are a lot of 0's for the precip variable, and the values are right skewed. With this in mind, taking the square root of precip helps reduce its skew, and therefore reduce the leverage of the data points with the greatest rainfall. This model will give better predictions for this data for these reasons.**
 
 # #10
 
