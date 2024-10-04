@@ -19,23 +19,18 @@ summary(lamp.model)
 **θ1 = .171 θ2 = 2.066**
 
 ```{r}
-exp.growth <- nls(energy ~ th1 * exp(th2 * temperature), data = lamp, start = list(th1 = 2.5, th2 = 2.068))
-summary(exp.growth)
+model1 <- nls(energy ~ th1 * exp(th2 * temperature), data = lamp, start = list(th1 = 2.5, th2 = 2.068))
+summary(model1)
 ```
 
 # #2
 
 (1 point) Use your model fit from question 1 to predict the energy output of this lamp when the temperature is x = 1.4 (which corresponds to 1400 K). Show work or computer code.
 
-**3.087 energy per cm\^2 per second**
+**3.084 energy per cm\^2 per second**
 
 ```{r}
-exp.growth2 <- nls(energy ~ th1 * exp(th2 * temperature) + th3, data = lamp, start = list(th1 = 2.5, th2 = 2.068, th3 = 0))
-summary(exp.growth2)
-```
-
-```{r}
-y_value <- .168 * exp(2.075 * 1.4) + .018
+y_value <- .171 * exp(2.066 * 1.4) 
 ```
 
 # #3
@@ -45,14 +40,14 @@ Using the model in equation 2, calculate an F-statistic and a corresponding p-va
 **F-statistic = .213, p-value = .8086, DF = 2**
 
 ```{r}
-trailuser <- read.table("trailuser.txt", header = TRUE, stringsAsFactors = TRUE)
-trailuser$dayType <- as.factor(trailuser$dayType)
-trailuser$season <- as.factor(trailuser$season)
+model2 <- read.table("trailuser.txt", header = TRUE, stringsAsFactors = TRUE)
+model2$dayType <- as.factor(model2$dayType)
+model2$season <- as.factor(model2$season)
 
-contrasts(trailuser$dayType)
-contrasts(trailuser$season)
+contrasts(model2$dayType)
+contrasts(model2$season)
 
-additive_model <- lm(volume ~ avgtemp + precip + dayType + season, data = trailuser)
+additive_model <- lm(volume ~ avgtemp + precip + dayType + season, data = model2)
 summary(additive_model)
 ```
 
@@ -65,11 +60,21 @@ anova_results
 
 # #4
 
-(1 point) Choose the best interpretation of the outcome from your test in question 3. A. There is mildly strong evidence that trail usage differs among the three seasons. B. If we compare days with identical temperature, precipitation, and day type (that is, whether the day is a weekday or not), then there is mildly strong evidence that trail usage differs among the three seasons. C. There is no evidence that trail usage differs among the three seasons. D. If we compare days with identical temperature and precipitation, and day type (that is, whether the day is a weekday or not), then there is no evidence that trail usage differs among the three seasons.
+(1 point) Choose the best interpretation of the outcome from your test in question 3.
+
+A. There is mildly strong evidence that trail usage differs among the three seasons.
+
+B. If we compare days with identical temperature, precipitation, and day type (that is, whether the day is a weekday or not), then there is mildly strong evidence that trail usage differs among the three seasons.
+
+C. There is no evidence that trail usage differs among the three seasons.
+
+D. If we compare days with identical temperature and precipitation, and day type (that is, whether the day is a weekday or not), then there is no evidence that trail usage differs among the three seasons.
 
 **Answer = D**
 
 # #5
+
+(2 points) In the model in equation 3, provide a brief non-technical interpretation of why the estimated partial regression coefficient associated with the quadratic effect of avgtemp is negative. That is, what have we learned from the fact that βˆ \< 0, and why does this make sense in the context of this particular data set?
 
 **While higher avgtemp initially leads to an increase in the number of trail users, there is a point in which further temperature increases result in decreased usage. This suggests that really high temperatures deter users.**
 
@@ -85,13 +90,19 @@ summary(quadratic_model)
 
 # #6
 
-Use the model in equation 3 to complete each of the statements below: (a) (1 point) “When comparing two week-end days with the same temperature, a day on which it rains 0.25 inches will have an average of ***37.02 fewer*** trail users than a day on which it doesn’t rain.”
+Use the model in equation 3 to complete each of the statements below:
+
+\(a\) (1 point) “When comparing two week-end days with the same temperature, a day on which it rains 0.25 inches will have an average of ***37.02 fewer*** trail users than a day on which it doesn’t rain.”
 
 ```{r}
-.25 * 
+
 ```
 
-(b) (1 point) “When comparing two days with the same temperature and precipitation, a weekday will have an average of ***93.65 fewer*** trail users than a weekend day.”
+b\) (1 point) “When comparing two days with the same temperature and precipitation, a weekday will have an average of ***93.65 fewer*** trail users than a weekend day.”
+
+```{r}
+
+```
 
 # #7
 
@@ -140,7 +151,7 @@ predicted_usage
 
 # #9
 
-**I would prefer model 4**
+**I would favor reporting model 4**
 
 # #10
 
