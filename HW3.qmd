@@ -1,0 +1,190 @@
+# ST 512 Homework 3
+
+```{r}
+library(dplyr)
+```
+
+```{r}
+lamp <- read.table("lamp.txt", header = TRUE)
+with(lamp, plot(energy ~ temperature))
+```
+
+```{r}
+lamp.model <- lm(log(energy) ~ temperature, data = lamp)
+summary(lamp.model)
+```
+
+2.068 = estimate for O2 \# #1 (2 points) Report the least-squares estimates of the parameters θ1 and θ2 for the lamp data. Show work or computer code.
+
+**θ1 = .171 θ2 = 2.066**
+
+```{r}
+exp.growth <- nls(energy ~ th1 * exp(th2 * temperature), data = lamp, start = list(th1 = 2.5, th2 = 2.068))
+summary(exp.growth)
+```
+
+# #2
+
+(1 point) Use your model fit from question 1 to predict the energy output of this lamp when the temperature is x = 1.4 (which corresponds to 1400 K). Show work or computer code.
+
+**3.087 energy per cm\^2 per second**
+
+```{r}
+exp.growth2 <- nls(energy ~ th1 * exp(th2 * temperature) + th3, data = lamp, start = list(th1 = 2.5, th2 = 2.068, th3 = 0))
+summary(exp.growth2)
+```
+
+```{r}
+y_value <- .168 * exp(2.075 * 1.4) + .018
+```
+
+# #3
+
+Using the model in equation 2, calculate an F-statistic and a corresponding p-value to test for differences among the seasons when comparing days with the same temperature, precipitation, and type of day. That is, in notation, test H0 : β4 = β5 = 0. Be sure to report both the F -statistic and the p-value, and be sure to give the associated df for the F-statistic. Show some work or computer code.
+
+**F-statistic = .213, p-value = .8086, DF = 2**
+
+```{r}
+trailuser <- read.table("trailuser.txt", header = TRUE, stringsAsFactors = TRUE)
+trailuser$dayType <- as.factor(trailuser$dayType)
+trailuser$season <- as.factor(trailuser$season)
+
+contrasts(trailuser$dayType)
+contrasts(trailuser$season)
+
+additive_model <- lm(volume ~ avgtemp + precip + dayType + season, data = trailuser)
+summary(additive_model)
+```
+
+```{r}
+full_model <- lm(volume ~ avgtemp + precip + dayType + season, data = trailuser)
+reduced_model <- lm(volume ~ avgtemp + precip + dayType, data = trailuser)
+anova_results <- anova(reduced_model, full_model)
+anova_results 
+```
+
+# #4
+
+(1 point) Choose the best interpretation of the outcome from your test in question 3. A. There is mildly strong evidence that trail usage differs among the three seasons. B. If we compare days with identical temperature, precipitation, and day type (that is, whether the day is a weekday or not), then there is mildly strong evidence that trail usage differs among the three seasons. C. There is no evidence that trail usage differs among the three seasons. D. If we compare days with identical temperature and precipitation, and day type (that is, whether the day is a weekday or not), then there is no evidence that trail usage differs among the three seasons.
+
+**Answer = D**
+
+# #5
+
+**While higher avgtemp initially leads to an increase in the number of trail users, there is a point in which further temperature increases result in decreased usage. This suggests that really high temperatures deter users.**
+
+```{r}
+par(mfrow = c(1, 2)) 
+plot(reduced_model)
+```
+
+```{r}
+quadratic_model <- lm(volume ~ avgtemp + I(avgtemp^2) + precip + dayType, data = trailuser)
+summary(quadratic_model)
+```
+
+# #6
+
+Use the model in equation 3 to complete each of the statements below: (a) (1 point) “When comparing two week-end days with the same temperature, a day on which it rains 0.25 inches will have an average of ***37.02 fewer*** trail users than a day on which it doesn’t rain.”
+
+```{r}
+.25 * 
+```
+
+(b) (1 point) “When comparing two days with the same temperature and precipitation, a weekday will have an average of ***93.65 fewer*** trail users than a weekend day.”
+
+# #7
+
+(1 point) Use the model in equation 3 to predict the trail usage on a weekday when the avgtemp = 55◦ F and the precip = 0.15 in. Show some work or computer code.
+
+**532.643**
+
+```{r}
+beta0 <- -599.94041
+beta1 <- 27.81275
+beta2 <- -0.18344
+beta3 <- -148.07875
+dayType_weekend <- 0
+
+avgtemp <- 55
+precip <- 0.15
+
+predicted_volume <- beta0 + 
+                   (beta1 * avgtemp) + 
+                   (beta2 * (avgtemp^2)) + 
+                   (beta3 * precip) + 
+                   (dayType_weekend * 93.65017)
+predicted_volume
+```
+
+# #8
+
+(1 point) Use the model in equation 4 to predict the trail usage on a weekday when the avgtemp = 55◦ F and the precip = 0.15 in. Show some work or computer code.
+
+**314.292**
+
+```{r}
+trailuser2 <- trailuser |>
+  mutate(sqrt_precip = sqrt(precip))
+```
+
+```{r}
+model4 <- lm(volume ~ avgtemp + I(avgtemp^2) + sqrt_precip + dayType, data = trailuser)
+
+sqrt_precip_value <- sqrt(0.15)
+new_data <- data.frame(avgtemp = 55,
+                       I.avgtemp.2 = 55^2, sqrt_precip = sqrt_precip_value, dayType = factor("weekday", levels = c("weekday", "weekend")))
+predicted_usage <- predict(model4, newdata = new_data)
+predicted_usage
+```
+
+# #9
+
+**I would prefer model 4**
+
+# #10
+
+a)  (1 point) Which of the following statements provides the best interpretation of the fact that β3 \> 0? Choose the best answer. A. As BP increases, the slope of the association between Y and BMI increases. B. As BP increases, the slope of the association between Y and BMI decreases. C. BMI and BP are positively correlated. D. Both choices B and C are reasonable interpretations. E. None of the above are reasonable interpretations.
+
+    **Answer = A**
+
+b\) (2 points) Use the model to predict the response for someone who has a BMI of 25 and a blood pressure (BP) of 90.
+
+**139.35**
+
+```{r}
+intercept <- 66.45
+beta_BMI <- -1.62
+beta_BP <- -1.49
+beta_interaction <- 0.11
+
+BMI <- 25
+BP <- 90
+
+interaction_term <- BMI * BP
+
+predicted_response <- intercept + (beta_BMI * BMI) + (beta_BP * BP) + (beta_interaction * interaction_term)
+predicted_response
+```
+
+(c) (4 points) Which of the statements below are supported by the fit and analysis of the multiple regression model? Choose ’supported’ if the statement is supported by the analysis of the multiple regression model, and ‘not supported’ if it is not supported.
+
+<!-- -->
+
+i)  Using the conventional threshold for statistical signif- icance, there is statistically significant evidence that the association between BMI and the response depends on the value of BP.
+
+    **SUPPORTED**
+
+<!-- -->
+
+(ii) The average value of the response is 66.45.
+
+     **NOT SUPPORTED**
+
+(iii) The multiple regression model provides a significantly better fit than a model that includes only an intercept.
+
+      **SUPPORTED**
+
+(iv) The multiple regression model explains roughly 40% of the variation in the response.
+
+     **SUPPORTED**
