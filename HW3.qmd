@@ -13,7 +13,7 @@ with(lamp, plot(energy ~ temperature))
 lamp.model <- lm(log(energy) ~ temperature, data = lamp)
 summary(lamp.model)
 ```
-
+# #1
 2.068 = estimate for O2 \# #1 (2 points) Report the least-squares estimates of the parameters θ1 and θ2 for the lamp data. Show work or computer code.
 
 **θ1 = .171 θ2 = 2.066**

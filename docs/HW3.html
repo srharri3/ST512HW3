@@ -171,6 +171,9 @@ Multiple R-squared:  0.9957,    Adjusted R-squared:  0.9946
 F-statistic: 918.5 on 1 and 4 DF,  p-value: 7.061e-06</code></pre>
 </div>
 </div>
+</section>
+<section id="section" class="level1">
+<h1>#1</h1>
 <p>2.068 = estimate for O2 # #1 (2 points) Report the least-squares estimates of the parameters θ1 and θ2 for the lamp data. Show work or computer code.</p>
 <p><strong>θ1 = .171 θ2 = 2.066</strong></p>
 <div class="cell">
@@ -194,7 +197,7 @@ Achieved convergence tolerance: 9.712e-09</code></pre>
 </div>
 </div>
 </section>
-<section id="section" class="level1">
+<section id="section-1" class="level1">
 <h1>#2</h1>
 <p>(1 point) Use your model fit from question 1 to predict the energy output of this lamp when the temperature is x = 1.4 (which corresponds to 1400 K). Show work or computer code.</p>
 <p><strong>3.084 energy per cm^2 per second</strong></p>
@@ -202,7 +205,7 @@ Achieved convergence tolerance: 9.712e-09</code></pre>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>y_value <span class="ot">&lt;-</span> .<span class="dv">171</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="fl">2.066</span> <span class="sc">*</span> <span class="fl">1.4</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="section-1" class="level1">
+<section id="section-2" class="level1">
 <h1>#3</h1>
 <p>Using the model in equation 2, calculate an F-statistic and a corresponding p-value to test for differences among the seasons when comparing days with the same temperature, precipitation, and type of day. That is, in notation, test H0 : β4 = β5 = 0. Be sure to report both the F -statistic and the p-value, and be sure to give the associated df for the F-statistic. Show some work or computer code.</p>
 <p><strong>F-statistic = .213, p-value = .8086, DF = 2</strong></p>
@@ -267,7 +270,7 @@ Model 2: volume ~ avgtemp + precip + dayType + season
 </div>
 </div>
 </section>
-<section id="section-2" class="level1">
+<section id="section-3" class="level1">
 <h1>#4</h1>
 <p>(1 point) Choose the best interpretation of the outcome from your test in question 3.</p>
 <p>A. There is mildly strong evidence that trail usage differs among the three seasons.</p>
@@ -276,7 +279,7 @@ Model 2: volume ~ avgtemp + precip + dayType + season
 <p>D. If we compare days with identical temperature and precipitation, and day type (that is, whether the day is a weekday or not), then there is no evidence that trail usage differs among the three seasons.</p>
 <p><strong>Answer = D</strong></p>
 </section>
-<section id="section-3" class="level1">
+<section id="section-4" class="level1">
 <h1>#5</h1>
 <p>(2 points) In the model in equation 3, provide a brief non-technical interpretation of why the estimated partial regression coefficient associated with the quadratic effect of avgtemp is negative. That is, what have we learned from the fact that βˆ &lt; 0, and why does this make sense in the context of this particular data set?</p>
 <p><strong>While higher avgtemp initially leads to an increase in the number of trail users, there is a point in which further temperature increases result in decreased usage. This suggests that really high temperatures deter users.</strong></p>
@@ -327,7 +330,7 @@ F-statistic: 16.96 on 4 and 68 DF,  p-value: 1.086e-09</code></pre>
 </div>
 </div>
 </section>
-<section id="section-4" class="level1">
+<section id="section-5" class="level1">
 <h1>#6</h1>
 <p>Use the model in equation 3 to complete each of the statements below:</p>
 <p>(a) (1 point) “When comparing two week-end days with the same temperature, a day on which it rains 0.25 inches will have an average of <strong><em>37.02 fewer</em></strong> trail users than a day on which it doesn’t rain.”</p>
@@ -339,7 +342,7 @@ F-statistic: 16.96 on 4 and 68 DF,  p-value: 1.086e-09</code></pre>
 </div>
 <p>b) (1 point) “When comparing two days with the same temperature and precipitation, a weekday will have an average of <strong><em>93.65 fewer</em></strong> trail users than a weekend day.”</p>
 </section>
-<section id="section-5" class="level1">
+<section id="section-6" class="level1">
 <h1>#7</h1>
 <p>(1 point) Use the model in equation 3 to predict the trail usage on a weekday when the avgtemp = 55◦ F and the precip = 0.15 in. Show some work or computer code.</p>
 <p><strong>352.643</strong></p>
@@ -364,7 +367,7 @@ F-statistic: 16.96 on 4 and 68 DF,  p-value: 1.086e-09</code></pre>
 </div>
 </div>
 </section>
-<section id="section-6" class="level1">
+<section id="section-7" class="level1">
 <h1>#8</h1>
 <p>(1 point) Use the model in equation 4 to predict the trail usage on a weekday when the avgtemp = 55◦ F and the precip = 0.15 in. Show some work or computer code.</p>
 <p><strong>314.292</strong></p>
@@ -386,11 +389,11 @@ F-statistic: 16.96 on 4 and 68 DF,  p-value: 1.086e-09</code></pre>
 </div>
 </div>
 </section>
-<section id="section-7" class="level1">
-<h1>#9</h1>
-<p>**I would favor reporting model 4</p>
-</section>
 <section id="section-8" class="level1">
+<h1>#9</h1>
+<p><strong>I would favor reporting model 4. Like the homework says, there are a lot of 0’s for the precip variable, and the values are right skewed. With this in mind, taking the square root of precip helps reduce its skew, and therefore reduce the leverage of the data points with the greatest rainfall. This model will give better predictions for this data for these reasons.</strong></p>
+</section>
+<section id="section-9" class="level1">
 <h1>#10</h1>
 <ol type="a">
 <li><p>(1 point) Which of the following statements provides the best interpretation of the fact that β3 &gt; 0? Choose the best answer. A. As BP increases, the slope of the association between Y and BMI increases. B. As BP increases, the slope of the association between Y and BMI decreases. C. BMI and BP are positively correlated. D. Both choices B and C are reasonable interpretations. E. None of the above are reasonable interpretations.</p>
