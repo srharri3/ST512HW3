@@ -40,14 +40,14 @@ Using the model in equation 2, calculate an F-statistic and a corresponding p-va
 **F-statistic = .213, p-value = .8086, DF = 2**
 
 ```{r}
-model2 <- read.table("trailuser.txt", header = TRUE, stringsAsFactors = TRUE)
-model2$dayType <- as.factor(model2$dayType)
-model2$season <- as.factor(model2$season)
+trailuser <- read.table("trailuser.txt", header = TRUE, stringsAsFactors = TRUE)
+trailuser$dayType <- as.factor(trailuser$dayType)
+trailuser$season <- as.factor(trailuser$season)
 
-contrasts(model2$dayType)
-contrasts(model2$season)
+contrasts(trailuser$dayType)
+contrasts(trailuser$season)
 
-additive_model <- lm(volume ~ avgtemp + precip + dayType + season, data = model2)
+additive_model <- lm(volume ~ avgtemp + precip + dayType + season, data = trailuser)
 summary(additive_model)
 ```
 
@@ -95,20 +95,16 @@ Use the model in equation 3 to complete each of the statements below:
 \(a\) (1 point) “When comparing two week-end days with the same temperature, a day on which it rains 0.25 inches will have an average of ***37.02 fewer*** trail users than a day on which it doesn’t rain.”
 
 ```{r}
-
+.25 * -148.079
 ```
 
 b\) (1 point) “When comparing two days with the same temperature and precipitation, a weekday will have an average of ***93.65 fewer*** trail users than a weekend day.”
-
-```{r}
-
-```
 
 # #7
 
 (1 point) Use the model in equation 3 to predict the trail usage on a weekday when the avgtemp = 55◦ F and the precip = 0.15 in. Show some work or computer code.
 
-**532.643**
+**352.643**
 
 ```{r}
 beta0 <- -599.94041
@@ -140,7 +136,7 @@ trailuser2 <- trailuser |>
 ```
 
 ```{r}
-model4 <- lm(volume ~ avgtemp + I(avgtemp^2) + sqrt_precip + dayType, data = trailuser)
+model4 <- lm(volume ~ avgtemp + I(avgtemp^2) + sqrt_precip + dayType, data = trailuser2)
 
 sqrt_precip_value <- sqrt(0.15)
 new_data <- data.frame(avgtemp = 55,
@@ -151,11 +147,16 @@ predicted_usage
 
 # #9
 
-**I would favor reporting model 4**
+**I would favor reporting model 4 
 
 # #10
 
-a)  (1 point) Which of the following statements provides the best interpretation of the fact that β3 \> 0? Choose the best answer. A. As BP increases, the slope of the association between Y and BMI increases. B. As BP increases, the slope of the association between Y and BMI decreases. C. BMI and BP are positively correlated. D. Both choices B and C are reasonable interpretations. E. None of the above are reasonable interpretations.
+a)  (1 point) Which of the following statements provides the best interpretation of the fact that β3 \> 0? Choose the best answer. 
+A. As BP increases, the slope of the association between Y and BMI increases. 
+B. As BP increases, the slope of the association between Y and BMI decreases. 
+C. BMI and BP are positively correlated. 
+D. Both choices B and C are reasonable interpretations. 
+E. None of the above are reasonable interpretations.
 
     **Answer = A**
 
